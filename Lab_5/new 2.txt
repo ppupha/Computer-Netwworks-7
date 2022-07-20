@@ -1,0 +1,20 @@
+    def get(self, request):
+        connection = get_connection()  # uses SMTP server specified in settings.py
+        connection.open()  # If you don't open the connection manually, Django will automatically open, then tear down the connection in msg.send()
+
+        html_content = render_to_string('myuser/index.html')
+        text_content = "AAAAAAAAAAAAAAAAAAAAaa"
+
+        data = [('subject'),]
+        msg = EmailMultiAlternatives("subject", text_content, "nguyensanghso@gmail.com", ['nguyensangqh@gmail.com',],connection=connection)
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+
+
+        connection.close()
+        return render(request, 'myuser/index.html')
+		
+		
+		
+EMAIL_HOST_USER = 'nguyensanghso@gmail.com'
+    EMAIL_HOST_PASSWORD = 'ywvgoegumbcxledt'
